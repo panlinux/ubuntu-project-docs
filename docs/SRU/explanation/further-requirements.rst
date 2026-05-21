@@ -134,7 +134,7 @@ conditions:
 Steps
 """""
 
-Using this exception also requires additional process:
+Here is the process to follow when requesting this exception for an SRU:
 
 #. Prepare the SRU in the usual way, including the normal bug
    documentation, package builds and testing.
