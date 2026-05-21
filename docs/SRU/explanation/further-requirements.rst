@@ -1,8 +1,8 @@
 Reasons for requirements
 ------------------------
 
-Preconditions
-~~~~~~~~~~~~~
+Targeted releases
+~~~~~~~~~~~~~~~~~
 
 .. _explanation-devel-first:
 
@@ -83,6 +83,38 @@ hardware enablement or new features.
 
 See also: :ref:`Reference → Requirements → General requirements for all
 SRUs <reference-general-requirements>`
+
+
+Exception to targeted release requirements for hardware enablement
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Scope
+# This is for hardware enablement only
+# Or for fixing a bugs related to a hardware component that was only enabled in a particular release
+
+Reasoning
+# If we are honest, deprecation of hardware already happens in new releases - by moving to newer versions, but that does not prevent new releases or upgrades.
+# We acknowledge that no enablement due to a too strict policy, would be less helpful to the users of Ubuntu.
+# But we care about the users upgrade experience too and hence can't just accept selective enablement without guardrails.
+# This policy is therefore a compromise to make it possible, although not too easy, to enable hardware only in specific active Ubuntu releases
+
+Policy
+# Hardware enablement might skip -devel and interim releases provided the following conditions are met:
+  # It targets at least the latest active LTS e.g. not only updating a previous LTS
+  # Upgrades from the targeted release onwards will get a fucntion to detect and block (do-release-upgrade) upgrades related to the selectively enabled functionality
+  # The team behind this change keeps this up to date, e.g. if the enablement is resolved in a future release the blocker will be removed
+
+Steps
+# If you go this exception route:
+  # Prepare the update (PPA builds, general SRU bug template)
+  # Prepare the upgrade block functionality
+  # Present your case as pull request adding it as special case to SRU/reference/package-specific/#defined-exceptions
+    # You only need to do this once per involved components and reasoning, not for every upload of the same kind
+  # Reach out to the tech-board for approval of this pull request
+  # Once discussed and approved by the tech board they write the outcome to their mailing list
+    # Provide a link to the decision in https://lists.ubuntu.com/archives/technical-board/ to the PR
+    # The SRU team will merge the pull request and from now processes the case based on that approved special case
+  # Finish the associated SRU bug by referring to the approved special case
 
 .. _explanation-documentation:
 
