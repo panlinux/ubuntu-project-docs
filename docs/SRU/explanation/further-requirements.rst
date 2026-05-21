@@ -88,9 +88,15 @@ SRUs <reference-general-requirements>`
 Exception to targeted release requirements for hardware enablement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Scope
+"""""
+
 This exception applies only to hardware enablement, or to bug fixes for
 hardware that is itself enabled only in a particular supported Ubuntu
 release.
+
+Reasoning
+"""""""""
 
 The general rule remains that fixes and features should be present in
 the development release and all newer supported releases before they are
@@ -107,6 +113,9 @@ functionality in the development release and every newer supported
 release. Because this creates an upgrade risk, such cases require
 explicit safeguards and are not routine.
 
+Policy
+""""""
+
 Any request to use this exception must meet all of the following
 conditions:
 
@@ -121,6 +130,9 @@ conditions:
 #. The team requesting the exception must maintain that upgrade
    protection for as long as it is needed, and remove or update it when
    the selective enablement is superseded or no longer required.
+
+Steps
+"""""
 
 Using this exception also requires additional process:
 
