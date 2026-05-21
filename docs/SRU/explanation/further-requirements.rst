@@ -134,25 +134,29 @@ conditions:
 Steps
 """""
 
-Here is the process to follow when requesting this exception for an SRU:
+Here is the process to follow when requesting an SRU using this exception:
 
 #. Prepare the SRU in the usual way, including the normal bug
    documentation, package builds and testing.
-#. Prepare the upgrade-path protection at the same time as the
-   enablement itself.
-#. Submit a pull request against this documentation adding a standing
-   exception under :ref:`Package-specific notes
-   <reference-package-specific-notes>`. This is normally required once
-   per class of enablement and rationale, rather than once per upload.
-#. Because this departs from the broad SRU policy criteria, obtain
-   approval from the Technical Board and link the published decision from
-   the pull request. See the `Technical Board mailing list archive
-   <https://lists.ubuntu.com/archives/technical-board/>`__.
-#. Once the exception is approved and documented here, the SRU team may
-   review future uploads against that standing exception.
-#. Each SRU bug using this exception must refer to the approved
-   exception and explain how the required upgrade protection applies to
-   that upload.
+#. Prepare the upgrade path protection as a PR to the `ubuntu-release-upgrader
+   project <https://git.launchpad.net/ubuntu-release-upgrader>`__ at the same time
+   as the enablement itself.
+#. Add an ubuntu-release-upgrader package task to the SRU bug. Once the PR to
+   the upstream project is accepted and merged, the Ubuntu package will also
+   need to be updated.
+#. Submit a pull request against this documentation adding a standing exception
+   under :ref:`Package-specific notes <reference-package-specific-notes>`. This
+   is normally required once per class of enablement and rationale, rather than
+   once per upload.
+#. Request reviews from the SRU team and notify the Ubuntu Technical Board via
+   their mailing list at https://lists.ubuntu.com/archives/technical-board/.
+#. Once discussed and approved by the Technical Board, the PR should provide a
+   link to this approval. With the approval properly documented, the SRU team
+   will merge the PR to this documentation, and the exception will be formally
+   approved and documented here.
+#. From now on, this special case can then be used for SRUs that claim it.
+#. Each SRU bug claiming this exception must refer to the approved exception by
+   URL and follow these steps.
 
 .. _explanation-documentation:
 
