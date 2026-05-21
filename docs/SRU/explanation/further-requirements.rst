@@ -88,33 +88,59 @@ SRUs <reference-general-requirements>`
 Exception to targeted release requirements for hardware enablement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Scope
-# This is for hardware enablement only
-# Or for fixing a bugs related to a hardware component that was only enabled in a particular release
+This exception applies only to hardware enablement, or to bug fixes for
+hardware that is itself enabled only in a particular supported Ubuntu
+release.
 
-Reasoning
-# If we are honest, deprecation of hardware already happens in new releases - by moving to newer versions, but that does not prevent new releases or upgrades.
-# We acknowledge that no enablement due to a too strict policy, would be less helpful to the users of Ubuntu.
-# But we care about the users upgrade experience too and hence can't just accept selective enablement without guardrails.
-# This policy is therefore a compromise to make it possible, although not too easy, to enable hardware only in specific active Ubuntu releases
+The general rule remains that fixes and features should be present in
+the development release and all newer supported releases before they are
+backported to an older stable release. However, hardware support does
+change over time as Ubuntu moves to newer kernels, drivers and user
+space components. In some cases, insisting on enablement in every later
+release would prevent useful support from reaching users of a supported
+LTS, while still not eliminating all differences in hardware support
+between releases.
 
-Policy
-# Hardware enablement might skip -devel and interim releases provided the following conditions are met:
-  # It targets at least the latest active LTS e.g. not only updating a previous LTS
-  # Upgrades from the targeted release onwards will get a fucntion to detect and block (do-release-upgrade) upgrades related to the selectively enabled functionality
-  # The team behind this change keeps this up to date, e.g. if the enablement is resolved in a future release the blocker will be removed
+For that reason, we may exceptionally permit selective hardware
+enablement in a stable release without first enabling the same
+functionality in the development release and every newer supported
+release. Because this creates an upgrade risk, such cases require
+explicit safeguards and are not routine.
 
-Steps
-# If you go this exception route:
-  # Prepare the update (PPA builds, general SRU bug template)
-  # Prepare the upgrade block functionality
-  # Present your case as pull request adding it as special case to SRU/reference/package-specific/#defined-exceptions
-    # You only need to do this once per involved components and reasoning, not for every upload of the same kind
-  # Reach out to the tech-board for approval of this pull request
-  # Once discussed and approved by the tech board they write the outcome to their mailing list
-    # Provide a link to the decision in https://lists.ubuntu.com/archives/technical-board/ to the PR
-    # The SRU team will merge the pull request and from now processes the case based on that approved special case
-  # Finish the associated SRU bug by referring to the approved special case
+Any request to use this exception must meet all of the following
+conditions:
+
+#. The enablement must target at least the latest active LTS release. It
+   is not appropriate to enable hardware only in an older supported LTS
+   while omitting the current LTS.
+#. Users must be protected from upgrading into a release where the
+   selectively enabled functionality is unavailable or unsupported. In
+   practice, the supported upgrade path, such as ``do-release-upgrade``,
+   must detect affected systems and block the upgrade until a supported
+   path exists.
+#. The team requesting the exception must maintain that upgrade
+   protection for as long as it is needed, and remove or update it when
+   the selective enablement is superseded or no longer required.
+
+Using this exception also requires additional process:
+
+#. Prepare the SRU in the usual way, including the normal bug
+   documentation, package builds and testing.
+#. Prepare the upgrade-path protection at the same time as the
+   enablement itself.
+#. Submit a pull request against this documentation adding a standing
+   exception under :ref:`Package-specific notes
+   <reference-package-specific-notes>`. This is normally required once
+   per class of enablement and rationale, rather than once per upload.
+#. Because this departs from the broad SRU policy criteria, obtain
+   approval from the Technical Board and link the published decision from
+   the pull request. See the `Technical Board mailing list archive
+   <https://lists.ubuntu.com/archives/technical-board/>`__.
+#. Once the exception is approved and documented here, the SRU team may
+   review future uploads against that standing exception.
+#. Each SRU bug using this exception must refer to the approved
+   exception and explain how the required upgrade protection applies to
+   that upload.
 
 .. _explanation-documentation:
 
